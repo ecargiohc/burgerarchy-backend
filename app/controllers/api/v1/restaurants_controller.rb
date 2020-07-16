@@ -37,5 +37,16 @@ class Api::V1::RestaurantsController < ApplicationController
   def destroy
     @restaurant.destroy
   end
+  
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_restaurant
+      @restaurant = Restaurant.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def restaurant_params
+      params.require(:restaurant).permit(:name, :image_url, :slug)
+    end
 
 end
